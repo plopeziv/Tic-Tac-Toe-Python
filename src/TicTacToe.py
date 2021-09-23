@@ -18,6 +18,9 @@ class GameState:
 
         self.gameWon = False
 
+    def isGameWon(self):
+        return True
+
     def startGame(self):
         print("\n Welcome to Tic Tac Toe!")
         self.printBoard()
@@ -51,6 +54,3 @@ class GameState:
 
         print ("Computer Picks " + computerPick + "! \n")
         self.printBoard()
-
-game = GameState()
-game.startGame()
