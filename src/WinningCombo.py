@@ -1,5 +1,16 @@
 import numpy as np
 # Checks to see if a winning combo has set
+def checkForWin(gameBoard):
+    size = np.shape(gameBoard)
+    
+    if size != (3,3):
+        return "Please enter a 3 by 3 matrix"
+
+    possibleWins = [checkWinningRows(gameBoard), checkWinningColumns(gameBoard), checkWinningDiagonals(gameBoard)]
+
+    if any(possibleWins) == True:
+        return True
+    return False
 
 # Checks rows 
 def checkWinningRows(gameBoard):

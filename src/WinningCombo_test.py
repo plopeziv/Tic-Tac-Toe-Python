@@ -1,4 +1,4 @@
-from src.WinningCombo import checkWinningRows, checkWinningColumns, checkWinningDiagonals
+from src.WinningCombo import checkWinningRows, checkWinningColumns, checkWinningDiagonals, checkForWin
 
 def test_checkBadBoards():
     gameBoard = [
@@ -63,3 +63,37 @@ def test_checkSecondWinningDiagonalReturnsWin():
         ["7", "8", "O"]]
 
     assert checkWinningDiagonals(gameBoard) == True
+
+# Intigration Tests
+
+def test_noWinDetected():
+    gameBoard = [
+        ["1", "2", "3"],
+        ["4", "5", "6"],
+        ["7", "8", "9"]]
+
+    assert checkForWin(gameBoard) == False
+
+def test_winByRow():
+    gameBoard = [
+        ["1", "2", "3"],
+        ["4", "5", "6"],
+        ["O", "O", "O"]]
+
+    assert checkForWin(gameBoard) == True
+
+def test_winByCollumn():
+    gameBoard = [
+        ["1", "2", "X"],
+        ["4", "5", "X"],
+        ["7", "8", "X"]]
+
+    assert checkForWin(gameBoard) == True
+
+def test_winByDiagonal():
+    gameBoard = [
+        ["1", "2", "O"],
+        ["4", "O", "6"],
+        ["O", "8", "9"]]
+
+    assert checkForWin(gameBoard) == True
