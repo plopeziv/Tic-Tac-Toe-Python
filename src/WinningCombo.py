@@ -12,11 +12,29 @@ def checkWinningRows(gameBoard):
         spaceTypes = len(np.unique(row))
         if spaceTypes == 1:
             return True
-        print(spaceTypes)
 
     return False
 
 
 # Checks columns 
+def checkWinningColumns(gameBoard):
+    size = np.shape(gameBoard)
 
-# Checks diagnols 
+    if size != (3,3):
+        return "Please enter a 3 by 3 matrix"
+    
+    shapedGame = np.array(gameBoard)
+    columnLists = np.array([[None] * size[1]] * size[0])
+
+    for i in range(len(shapedGame[0])):
+        for x in range(len(shapedGame[1])):
+            columnLists[x][i] = shapedGame[i][x]
+
+    for row in columnLists:
+        spaceTypes = len(np.unique(row))
+        if spaceTypes == 1:
+            return True
+
+    return False
+
+# Check Diagonals

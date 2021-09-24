@@ -1,4 +1,4 @@
-from src.WinningCombo import checkWinningRows
+from src.WinningCombo import checkWinningRows, checkWinningColumns
 
 def test_checkBadBoards():
     gameBoard = [
@@ -16,7 +16,7 @@ def test_checkWinningRowsReturnsFalse():
 
     assert checkWinningRows(gameBoard) == False
 
-def test_checkWinningRowsReturnsComputerWin():
+def test_checkWinningRowsReturnsWin():
     gameBoard = [
         ["1", "2", "3"],
         ["O", "O", "O"],
@@ -24,10 +24,18 @@ def test_checkWinningRowsReturnsComputerWin():
 
     assert checkWinningRows(gameBoard) == True
 
-def test_checkWinningRowsReturnsComputerWin():
+def test_checkWinningColumnsReturnsFalse():
     gameBoard = [
         ["1", "2", "3"],
         ["4", "5", "6"],
-        ["X", "X", "X"]]
+        ["7", "8", "9"]]
 
-    assert checkWinningRows(gameBoard) == True
+    assert checkWinningColumns(gameBoard) == False
+
+def test_checkWinningColumnsReturnsWin():
+    gameBoard = [
+        ["1", "X", "3"],
+        ["4", "X", "6"],
+        ["7", "X", "9"]]
+
+    assert checkWinningColumns(gameBoard) == True
