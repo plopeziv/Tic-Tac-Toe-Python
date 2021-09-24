@@ -1,4 +1,4 @@
-from src.WinningCombo import checkWinningRows, checkWinningColumns
+from src.WinningCombo import checkWinningRows, checkWinningColumns, checkWinningDiagonals
 
 def test_checkBadBoards():
     gameBoard = [
@@ -39,3 +39,27 @@ def test_checkWinningColumnsReturnsWin():
         ["7", "X", "9"]]
 
     assert checkWinningColumns(gameBoard) == True
+
+def test_checkWinningDiagonalsReturnsFalse():
+    gameBoard = [
+        ["1", "2", "3"],
+        ["4", "5", "6"],
+        ["7", "8", "9"]]
+
+    assert checkWinningDiagonals(gameBoard) == False
+
+def test_checkFirstWinningDiagonalReturnsWin():
+    gameBoard = [
+        ["1", "2", "X"],
+        ["4", "X", "6"],
+        ["X", "8", "9"]]
+
+    assert checkWinningDiagonals(gameBoard) == True
+
+def test_checkSecondWinningDiagonalReturnsWin():
+    gameBoard = [
+        ["O", "2", "3"],
+        ["4", "O", "6"],
+        ["7", "8", "O"]]
+
+    assert checkWinningDiagonals(gameBoard) == True
