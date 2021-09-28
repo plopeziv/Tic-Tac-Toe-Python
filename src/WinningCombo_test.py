@@ -72,11 +72,7 @@ def test_noWinDetected():
         ["4", "5", "6"],
         ["7", "8", "9"]]
 
-    assert checkForWin( 
-    [checkWinningRows(gameBoard), 
-    checkWinningColumns(gameBoard), 
-    checkWinningDiagonals(gameBoard)]
-    ) == False
+    assert checkForWin(gameBoard) == False
 
 def test_winByRow():
     gameBoard = [
@@ -84,11 +80,7 @@ def test_winByRow():
         ["4", "5", "6"],
         ["O", "O", "O"]]
 
-    assert checkForWin( 
-    [checkWinningRows(gameBoard), 
-    checkWinningColumns(gameBoard), 
-    checkWinningDiagonals(gameBoard)]
-    ) == True
+    assert checkForWin(gameBoard) == True
 
 def test_winByCollumn():
     gameBoard = [
@@ -96,11 +88,7 @@ def test_winByCollumn():
         ["4", "5", "X"],
         ["7", "8", "X"]]
 
-    assert checkForWin(
-    [checkWinningRows(gameBoard), 
-    checkWinningColumns(gameBoard), 
-    checkWinningDiagonals(gameBoard)]
-    ) == True
+    assert checkForWin(gameBoard) == True
 
 def test_winByDiagonal():
     gameBoard = [
@@ -108,8 +96,4 @@ def test_winByDiagonal():
         ["4", "O", "6"],
         ["O", "8", "9"]]
 
-    assert checkForWin(
-    [checkWinningRows(gameBoard), 
-    checkWinningColumns(gameBoard), 
-    checkWinningDiagonals(gameBoard)]
-    ) == True
+    assert checkForWin(gameBoard) == True
