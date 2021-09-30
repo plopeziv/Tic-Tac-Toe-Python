@@ -1,12 +1,17 @@
 from src.TicTacToe import GameState
 from unittest.mock import patch
 
-def test_printsCorrectBoard():
+def test_printsCorrectBoard(capsys):
     testState = GameState()
-
     testState.board = [["1", "2","X"],
          ["4", "O", "6"],
          ["X", "8", "9"]]
+
+    testState.printBoard()
+
+    captured = capsys.readouterr()
+
+    assert "\n 1 | 2 | X \n---+---+---\n 4 | O | 6 \n---+---+---\n X | 8 | 9 \n\n" in captured
     
 
 # Start of getComputerInput
