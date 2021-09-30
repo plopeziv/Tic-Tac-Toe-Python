@@ -1,6 +1,8 @@
 import random 
 import numpy as np
 
+from src.DifficultGame import bestComputerSpot
+
 class GameState:
     def __init__ (self):
         self.board = [["1", "2","3"],
@@ -39,14 +41,30 @@ class GameState:
 
         self.possibleInputs.remove(str(userInput))
 
+    def findPossibleInputs(self):
+        holdArray = []
+
+        for row in self.board:
+            holdArray.extend(row)
+
+        holdArray = np.unique(holdArray)
+        holdArray = holdArray.tolist()
+        
+        if holdArray.count("X") > 0:
+            holdArray.remove("X")
+        
+        if holdArray.count("O") > 0:
+            holdArray.remove("O")
+
+        self.possibleInputs = holdArray
+
 
     def getComputerInput(self):
-        list = self.possibleInputs
-        computerPick = random.choice(list)
-        
-        computerIndex = self.findIndex(computerPick, self.board)
-        self.board[computerIndex[0]][computerIndex[1]] = "O"
 
-        self.possibleInputs.remove(computerPick)
+        # Difficult Game Choice
+        self.board = bestComputerSpot(self.board)
 
-        print ("\nComputer Picks " + computerPick + "!")
+        # self.possibleInputs.remove(computerPick)
+        self.findPossibleInputs()
+
+        print ("\nComputer's Turn!")
