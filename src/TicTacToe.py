@@ -27,6 +27,7 @@ class GameState:
         self.board[1][0], self.board[1][1], self.board[1][2],
         self.board[2][0], self.board[2][1], self.board[2][2]))
 
+# Start of User Input Responsibility
     def findIndex(self, element, matrix):
         for row in range(len(matrix)):
             for column in range(len(matrix[row])):
@@ -40,7 +41,9 @@ class GameState:
         self.board[userIndex[0]][userIndex[1]] = "X"
 
         self.possibleInputs.remove(str(userInput))
+#End of User Input Responsibility 
 
+# Start of Computer Input Responsibility
     def findPossibleInputs(self):
         holdArray = []
 
@@ -61,10 +64,14 @@ class GameState:
 
     def getComputerInput(self):
 
-        # Difficult Game Choice
+        print(self.board)
+
+        # Difficult Game Choice Module
         self.board = bestComputerSpot(self.board)
 
-        # self.possibleInputs.remove(computerPick)
+        print(self.board)
+
         self.findPossibleInputs()
 
         print ("\nComputer's Turn!")
+# End of Computer Input Responsibility

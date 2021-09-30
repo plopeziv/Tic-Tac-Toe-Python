@@ -1,9 +1,15 @@
 from src.TicTacToe import GameState
 from unittest.mock import patch
 
-def test_sample():
-    assert True == True
+def test_printsCorrectBoard():
+    testState = GameState()
 
+    testState.board = [["1", "2","X"],
+         ["4", "O", "6"],
+         ["X", "8", "9"]]
+    
+
+# Start of getComputerInput
 def test_findPossibleInputsReturnsArray():
     testState = GameState()
 
@@ -35,6 +41,9 @@ def test_getComputerInputRemovesPossibleInputs():
 
 # unique spots are originally 6 and the computer spot makes it 5
     assert len(testState.possibleInputs) == 5 
+# End of getComputerInput()
+
+
 
 # @patch("src.TicTacToe.GameState.findIndex", return_value = (0,0))
 # def test_getComputerInputReplacesBoardSpace():
