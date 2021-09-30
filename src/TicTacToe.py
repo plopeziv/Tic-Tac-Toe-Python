@@ -15,7 +15,8 @@ class GameState:
 
     def startGame(self):
         self.printBoard()
-        self.getUserInput()
+        self.getUserMove()
+
         if len(self.possibleInputs) == 0:
             print("\nNo possible inputs left. Cat's Game!\n")
             quit()
@@ -36,6 +37,10 @@ class GameState:
 
     def getUserInput(self):
         userInput = input("Please select a square! \n")
+        return userInput
+
+    def getUserMove(self):
+        userInput = self.getUserInput()
 
         userIndex = self.findIndex(str(userInput), self.board)
         self.board[userIndex[0]][userIndex[1]] = "X"
