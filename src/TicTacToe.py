@@ -1,7 +1,7 @@
-import random 
+import random, sys 
 import numpy as np
 
-from src.DifficultGame import bestComputerSpot
+from DifficultGame import bestComputerSpot
 
 class GameState:
     def __init__ (self):
@@ -13,20 +13,28 @@ class GameState:
          "4", "5", "6",
          "7", "8", "9"]
 
-    def startGame(self):
+#  Game runner Responsibilities
+    def oneTurn(self):
+        self.checkForCatsGame()
+
         self.printBoard()
         self.getUserMove()
 
-        if len(self.possibleInputs) == 0:
-            print("\nNo possible inputs left. Cat's Game!\n")
-            quit()
+        self.checkForCatsGame()
+
         self.getComputerInput()
+
+    def checkForCatsGame(self):
+        if len(self.possibleInputs) == 0:
+            print("\nCat's Game!\n")
+            sys.exit()
 
     def printBoard(self):
         print("\n %s | %s | %s \n---+---+---\n %s | %s | %s \n---+---+---\n %s | %s | %s \n" % \
         (self.board[0][0], self.board[0][1], self.board[0][2],
         self.board[1][0], self.board[1][1], self.board[1][2],
         self.board[2][0], self.board[2][1], self.board[2][2]))
+# End of Game Runner Responsibilities
 
 # Start of User Input Responsibility
     def findIndex(self, element, matrix):
@@ -69,12 +77,8 @@ class GameState:
 
     def getComputerInput(self):
 
-        print(self.board)
-
         # Difficult Game Choice Module
         self.board = bestComputerSpot(self.board)
-
-        print(self.board)
 
         self.findPossibleInputs()
 
