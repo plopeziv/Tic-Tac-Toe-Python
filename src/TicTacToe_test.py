@@ -1,9 +1,13 @@
-from src.TicTacToe import GameState
+import sys
+sys.path
+sys.path.append("/src/")
+
+from TicTacToe import GameState
 from unittest import mock
 import pytest
 
 #Game runner responsibility
-@mock.patch("src.TicTacToe.GameState.getUserInput", return_value = "4")
+@mock.patch("TicTacToe.GameState.getUserInput", return_value = "4")
 def test_catsGameBeforeUser(userMock, capsys):
     testState = GameState()
     testState.board = [["O", "X","X"],
@@ -19,7 +23,7 @@ def test_catsGameBeforeUser(userMock, capsys):
 
     assert "Cat's Game!" in captured.out
 
-@mock.patch("src.TicTacToe.GameState.getUserInput", return_value = "4")
+@mock.patch("TicTacToe.GameState.getUserInput", return_value = "4")
 def test_catsGameBeforeComputer(userMock, capsys):
     testState = GameState()
     testState.board = [["O", "X","X"],
@@ -60,7 +64,7 @@ def test_findIndex():
 
     assert index == (1,1)
 
-@mock.patch("src.TicTacToe.GameState.getUserInput", return_value = "5")
+@mock.patch("TicTacToe.GameState.getUserInput", return_value = "5")
 def test_userInput(userMock):
     testState = GameState()
 
@@ -69,7 +73,7 @@ def test_userInput(userMock):
     assert userInput == "5"
 
 
-@mock.patch("src.TicTacToe.GameState.getUserInput", return_value = "5")
+@mock.patch("TicTacToe.GameState.getUserInput", return_value = "5")
 def test_getUserMoveChangesBoard(userMock):
     testState = GameState()
 
@@ -77,7 +81,7 @@ def test_getUserMoveChangesBoard(userMock):
 
     assert testState.board[1][1] == "X"
 
-@mock.patch("src.TicTacToe.GameState.getUserInput", return_value = "5")
+@mock.patch("TicTacToe.GameState.getUserInput", return_value = "5")
 def test_getUserMoveChangesBoard(userMock):
     testState = GameState()
 

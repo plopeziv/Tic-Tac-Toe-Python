@@ -1,6 +1,6 @@
 import sys
-from src.TicTacToe import GameState
-from src.WinningCombo import checkForWin
+from TicTacToe import GameState
+from WinningCombo import checkForWin
 
 def takeTurns(gameClass, winCounter=False):
 

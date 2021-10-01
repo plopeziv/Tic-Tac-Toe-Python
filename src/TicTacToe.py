@@ -1,7 +1,7 @@
 import random, sys 
 import numpy as np
 
-from src.DifficultGame import bestComputerSpot
+from DifficultGame import bestComputerSpot
 
 class GameState:
     def __init__ (self):

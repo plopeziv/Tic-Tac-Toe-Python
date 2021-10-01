@@ -1,4 +1,8 @@
-from src.WinningCombo import checkWinningRows, checkWinningColumns, checkWinningDiagonals, checkForWin
+import sys
+sys.path
+sys.path.append("/src/")
+
+from WinningCombo import checkWinningRows, checkWinningColumns, checkWinningDiagonals, checkForWin
 
 def test_checkBadBoards():
     gameBoard = [

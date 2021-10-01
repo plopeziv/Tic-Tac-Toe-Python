@@ -1,4 +1,4 @@
-from src.WinningCombo import checkForWin
+from WinningCombo import checkForWin
 from copy import deepcopy
 
 def bestComputerSpot (gameBoard):
