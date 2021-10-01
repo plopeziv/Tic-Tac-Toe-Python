@@ -1,12 +1,44 @@
 from src.GameLoop import takeTurns
+from src.TicTacToe import GameState
 from unittest import mock
+import pytest
 
 
-# def test_dummy():
-#     userInput = mock.Mock()
-#     userInput.side_effect = [1,2,3,4,5]
+def test_Greeting(capsys):
+    game = GameState()
+    game.board = [["O", "X","X"],
+         ["X", "O", "O"],
+         ["X", "O", "X"]]
+    game.possibleInputs = []
 
-#     computerInput = mock.Mock()
-#     computerInput.side_effect = [9,8,7,6]
+    with pytest.raises(SystemExit):
+        takeTurns(game, True)
 
-#     return False
+    captured = capsys.readouterr()
+
+    assert "Welcome to Tic Tac Toe!" in captured.out
+
+def test_CheckForGameOver(capsys):
+    game = GameState()
+
+    with pytest.raises(SystemExit):
+        takeTurns(game, True)
+
+    captured = capsys.readouterr()
+
+    assert "Game Over!" in captured.out
+
+@mock.patch("src.TicTacToe.GameState.getUserMove", return_value = None)
+def test_CheckGameLoopRunsWhenFalse(turnMock, capsys):
+    game = GameState()
+
+    game.possibleInputs = ["1", "2","3",
+         "4", "5", "6",
+         "7", "8", "9"]
+
+    with pytest.raises(SystemExit):
+        takeTurns(game)
+
+    captured = capsys.readouterr()
+
+    assert "Computer's Turn!" in captured.out
