@@ -2,6 +2,7 @@ import sys
 import numpy as np
 
 from ComputerTurn import getComputerInput
+from UserTurn import getUserMove
 
 class GameState:
     def __init__ (self):
@@ -18,7 +19,7 @@ class GameState:
         self.checkForCatsGame()
 
         self.printBoard()
-        self.getUserMove()
+        self.board, self.possibleInputs = getUserMove(self.board, self.possibleInputs)
 
         self.checkForCatsGame()
 
@@ -35,38 +36,3 @@ class GameState:
         self.board[1][0], self.board[1][1], self.board[1][2],
         self.board[2][0], self.board[2][1], self.board[2][2]))
 # End of Game Runner Responsibilities
-
-# Start of User Input Responsibility
-    def findIndex(self, element, matrix):
-        for row in range(len(matrix)):
-            for column in range(len(matrix[row])):
-                if matrix[row][column] == element:
-                    return (row, column)
-
-    def inputChecker(input, possibleInputs):
-        returnValue = False
-
-        if (input in possibleInputs):
-            returnValue = True
-
-        return returnValue
-
-    def getUserInput(self):
-        userInput = input("Please select a square! \n")
-
-        inputCheck = self.inputChecker(userInput, self.possibleInputs)
-
-        while inputCheck == False:
-            userInput = input("Input not found. Please select a valid space. \n")
-
-        
-        return userInput
-
-    def getUserMove(self):
-        userInput = self.getUserInput()
-
-        userIndex = self.findIndex(str(userInput), self.board)
-        self.board[userIndex[0]][userIndex[1]] = "X"
-
-        self.possibleInputs.remove(str(userInput))
-#End of User Input Responsibility 
