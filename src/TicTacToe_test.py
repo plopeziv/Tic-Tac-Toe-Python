@@ -50,6 +50,30 @@ def test_printsCorrectBoard(capsys):
     captured = capsys.readouterr()
 
     assert " 1 | 2 | X \n---+---+---\n 4 | O | 6 \n---+---+---\n X | 8 | 9 " in captured.out
+
+@mock.patch("TicTacToe.GameState.getUserInput", return_value = "4")
+def test_GameStateUpdatesPossibleInputs(computerMock):
+    testState = GameState()
+    originalBoard = [["1", "2", "3"],
+         ["4", "5", "6"],
+         ["7", "8", "9"]]
+
+    testState.oneTurn()
+
+    assert len(testState.possibleInputs) == 7
+
+@mock.patch("TicTacToe.GameState.getUserInput", return_value = "4")
+def test_GameStateUpdatesGameBoard(computerMock):
+    testState = GameState()
+    originalBoard = [["1", "2", "3"],
+         ["4", "5", "6"],
+         ["7", "8", "9"]]
+
+    testState.oneTurn()
+
+    assert testState.board == [["1", "2", "3"],
+         ["X", "O", "6"],
+         ["7", "8", "9"]]
 #End of game runner responsibility
 
 #Start of userInput responsibility
@@ -64,6 +88,26 @@ def test_findIndex():
 
     assert index == (1,1)
 
+def test_checkValidInputsReturnsFalse(capsys):
+    testState = GameState()
+
+    userInput = "S"
+    availableSpots = ["1", "2", "3"]
+
+    inputState = GameState.inputChecker(userInput, availableSpots)
+
+    assert inputState == False
+
+def test_checkValidInputsReturnsTrue(capsys):
+    testState = GameState()
+
+    userInput = "2"
+    availableSpots = ["1", "2", "3"]
+
+    inputState = GameState.inputChecker(userInput, availableSpots)
+
+    assert inputState == True
+
 @mock.patch("TicTacToe.GameState.getUserInput", return_value = "5")
 def test_userInput(userMock):
     testState = GameState()
@@ -71,7 +115,6 @@ def test_userInput(userMock):
     userInput = testState.getUserInput()
 
     assert userInput == "5"
-
 
 @mock.patch("TicTacToe.GameState.getUserInput", return_value = "5")
 def test_getUserMoveChangesBoard(userMock):
@@ -89,37 +132,3 @@ def test_getUserMoveChangesBoard(userMock):
 
     assert testState.possibleInputs.count("X") == 0
 # End of userInput responsibility 
-
-# Start of getComputerInput
-def test_findPossibleInputsReturnsArray():
-    testState = GameState()
-
-    testState.board = [["1", "2","X"],
-         ["4", "O", "6"],
-         ["X", "8", "9"]]
-
-
-    testState.findPossibleInputs()
-
-    assert testState.possibleInputs == ["1", "2", "4", "6", "8", "9"]
-
-def test_getComputerInputChangesBoard():
-    testState = GameState()
-
-    testState.getComputerInput()
-
-    assert testState.board == [["1", "2","3"],
-         ["4", "O", "6"],
-         ["7", "8", "9"]]
-
-def test_getComputerInputRemovesPossibleInputs():
-    testState = GameState()
-    testState.board = [["1", "2","X"],
-         ["4", "O", "6"],
-         ["X", "8", "9"]]
-
-    testState.getComputerInput()
-
-# unique spots are originally 6 and the computer spot makes it 5
-    assert len(testState.possibleInputs) == 5 
-# End of getComputerInput()

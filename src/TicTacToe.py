@@ -1,7 +1,7 @@
-import random, sys 
+import sys 
 import numpy as np
 
-from DifficultGame import bestComputerSpot
+from ComputerTurn import getComputerInput
 
 class GameState:
     def __init__ (self):
@@ -22,7 +22,7 @@ class GameState:
 
         self.checkForCatsGame()
 
-        self.getComputerInput()
+        self.board, self.possibleInputs = getComputerInput(self.board)
 
     def checkForCatsGame(self):
         if len(self.possibleInputs) == 0:
@@ -43,8 +43,23 @@ class GameState:
                 if matrix[row][column] == element:
                     return (row, column)
 
+    def inputChecker(input, possibleInputs):
+        returnValue = False
+
+        if (input in possibleInputs):
+            returnValue = True
+
+        return returnValue
+
     def getUserInput(self):
         userInput = input("Please select a square! \n")
+
+        inputCheck = self.inputChecker(userInput, self.possibleInputs)
+
+        while inputCheck == False:
+            userInput = input("Input not found. Please select a valid space. \n")
+
+        
         return userInput
 
     def getUserMove(self):
@@ -55,32 +70,3 @@ class GameState:
 
         self.possibleInputs.remove(str(userInput))
 #End of User Input Responsibility 
-
-# Start of Computer Input Responsibility
-    def findPossibleInputs(self):
-        holdArray = []
-
-        for row in self.board:
-            holdArray.extend(row)
-
-        holdArray = np.unique(holdArray)
-        holdArray = holdArray.tolist()
-        
-        if holdArray.count("X") > 0:
-            holdArray.remove("X")
-        
-        if holdArray.count("O") > 0:
-            holdArray.remove("O")
-
-        self.possibleInputs = holdArray
-
-
-    def getComputerInput(self):
-
-        # Difficult Game Choice Module
-        self.board = bestComputerSpot(self.board)
-
-        self.findPossibleInputs()
-
-        print ("\nComputer's Turn!")
-# End of Computer Input Responsibility
