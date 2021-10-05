@@ -16,7 +16,7 @@ def test_Greeting(capsys):
     game.possibleInputs = []
 
     with pytest.raises(SystemExit):
-        takeTurns(game, True)
+        takeTurns(game)
 
     captured = capsys.readouterr()
 
@@ -24,9 +24,12 @@ def test_Greeting(capsys):
 
 def test_CheckForGameOver(capsys):
     game = GameState()
+    game.board = [["X", "X","X"],
+         ["X", "O", "O"],
+         ["X", "O", "X"]]
 
     with pytest.raises(SystemExit):
-        takeTurns(game, True)
+        takeTurns(game)
 
     captured = capsys.readouterr()
 
