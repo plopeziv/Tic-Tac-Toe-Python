@@ -45,7 +45,7 @@ def test_userInputReturnsString(userMock):
     userInput = getUserInput(possibleInputs)
 
     assert type(userInput) == str
-    
+
 @mock.patch("UserTurn.getUserInput", return_value = "5")
 def test_getUserMoveChangesBoard(userMock):
     gameBoard = [["1", "2","3"],
