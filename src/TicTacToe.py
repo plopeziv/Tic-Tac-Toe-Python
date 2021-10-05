@@ -1,56 +1,52 @@
-# -*- coding: utf-8 -*-
-"""
-Spyder Editor
-
-This is a temporary script file.
-"""
 import random 
+import numpy as np
 
 class GameState:
     def __init__ (self):
-        self.board = ["0", "1","2",
-         "3", "4", "5",
-         "6", "7", "8"]
+        self.board = [["1", "2","3"],
+         ["4", "5", "6"],
+         ["7", "8", "9"]]
 
-        self.possibleInputs = ["0", "1","2",
-         "3", "4", "5",
-         "6", "7", "8"]
-
-        self.gameWon = False
-
-    def isGameWon(self):
-        return True
+        self.possibleInputs = ["1", "2","3",
+         "4", "5", "6",
+         "7", "8", "9"]
 
     def startGame(self):
-        print("\n Welcome to Tic Tac Toe!")
         self.printBoard()
         self.getUserInput()
+        if len(self.possibleInputs) == 0:
+            print("\nNo possible inputs left. Cat's Game!\n")
+            quit()
         self.getComputerInput()
 
     def printBoard(self):
         print("\n %s | %s | %s \n---+---+---\n %s | %s | %s \n---+---+---\n %s | %s | %s \n" % \
-        (self.board[0], self.board[1], self.board[2],
-        self.board[3], self.board[4], self.board[5],
-        self.board[6], self.board[7], self.board[8]))
+        (self.board[0][0], self.board[0][1], self.board[0][2],
+        self.board[1][0], self.board[1][1], self.board[1][2],
+        self.board[2][0], self.board[2][1], self.board[2][2]))
+
+    def findIndex(self, element, matrix):
+        for row in range(len(matrix)):
+            for column in range(len(matrix[row])):
+                if matrix[row][column] == element:
+                    return (row, column)
 
     def getUserInput(self):
-        userInput = input("Please select a square!")
+        userInput = input("Please select a square! \n")
 
-        userIndex = int(userInput)
-        self.board[userIndex] = "X"
+        userIndex = self.findIndex(str(userInput), self.board)
+        self.board[userIndex[0]][userIndex[1]] = "X"
 
-        self.possibleInputs.remove(userInput)
+        self.possibleInputs.remove(str(userInput))
 
-        self.printBoard()
 
     def getComputerInput(self):
         list = self.possibleInputs
         computerPick = random.choice(list)
         
-        computerIndex = int(computerPick)
-        self.board[computerIndex] = "O"
+        computerIndex = self.findIndex(computerPick, self.board)
+        self.board[computerIndex[0]][computerIndex[1]] = "O"
 
         self.possibleInputs.remove(computerPick)
 
-        print ("Computer Picks " + computerPick + "! \n")
-        self.printBoard()
+        print ("\nComputer Picks " + computerPick + "!")

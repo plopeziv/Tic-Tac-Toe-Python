@@ -1,8 +1,13 @@
 import numpy as np
+
 # Checks to see if a winning combo has set
-def checkForWin(functionArray):
-    if any(functionArray) == True:
+def checkForWin(gameBoard):
+    if any(
+    [checkWinningRows(gameBoard), 
+    checkWinningColumns(gameBoard), 
+    checkWinningDiagonals(gameBoard)]) == True:
         return True
+    
     return False
 
 # Checks rows 
@@ -50,11 +55,9 @@ def checkWinningDiagonals(gameBoard):
 
     firstDiagonal = [gameBoard[0][0], gameBoard[1][1], gameBoard[2][2]]
     firstDiagonal = len(np.unique(firstDiagonal))
-    print(firstDiagonal)
 
     secondDiagonal = [gameBoard[0][2], gameBoard[1][1], gameBoard[2][0]]
     secondDiagonal = len(np.unique(secondDiagonal))
-    print(secondDiagonal)
 
     if firstDiagonal == 1 or secondDiagonal == 1:
         return True

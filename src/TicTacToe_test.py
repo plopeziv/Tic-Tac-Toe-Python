@@ -12,11 +12,3 @@ def test_getComputerInput():
     testState.getComputerInput()
 
     assert len(testState.possibleInputs) == 8 
-
-def test_topRowWinningCombo():
-    testState = GameState()
-    testState.board = ["X", "X","X",
-         "3", "4", "5",
-         "6", "7", "8"]
-    
-    assert testState.isGameWon() == True
