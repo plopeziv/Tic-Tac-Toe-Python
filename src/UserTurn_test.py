@@ -5,7 +5,6 @@ sys.path.append("/src/")
 from UserTurn import * 
 from unittest import mock
 
-#Start of userInput responsibility
 def test_findIndex():
 
     matrix = [["B","C"],
@@ -40,6 +39,13 @@ def test_userInput(userMock):
 
     assert userInput == "5"
 
+@mock.patch("builtins.input", return_value = 5)
+def test_userInputReturnsString(userMock):
+    possibleInputs = ["1", "3", "5"]
+    userInput = getUserInput(possibleInputs)
+
+    assert type(userInput) == str
+    
 @mock.patch("UserTurn.getUserInput", return_value = "5")
 def test_getUserMoveChangesBoard(userMock):
     gameBoard = [["1", "2","3"],
@@ -66,4 +72,3 @@ def test_getUserMoveChangesInputArray(userMock):
 
     assert possibleInputs == ["1", "2", "3",
         "4", "6", "7", "8", "9"]
-# End of userInput responsibility 

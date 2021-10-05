@@ -3,7 +3,7 @@ sys.path
 sys.path.append("/src/")
 
 from GameLoop import takeTurns
-from TicTacToe import GameState
+from GameClass import GameState
 from unittest import mock
 import pytest
 
@@ -32,7 +32,7 @@ def test_CheckForGameOver(capsys):
 
     assert "Game Over!" in captured.out
 
-@mock.patch("TicTacToe.GameState.getUserMove", return_value = None)
+@mock.patch("builtins.input", return_value = None)
 def test_CheckGameLoopRunsWhenFalse(turnMock, capsys):
     game = GameState()
 

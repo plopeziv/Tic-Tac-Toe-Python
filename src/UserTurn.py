@@ -13,18 +13,18 @@ def inputChecker(input, possibleInputs):
     return returnValue
 
 def getUserInput(possibleInputArray):
-    userInput = input("Please select a square! \n")
+    userInput = str(input("Please select a square! \n"))
 
     inputCheck = inputChecker(userInput, possibleInputArray)
 
     while inputCheck == False:
-        userInput = input("Input not found. Please select a valid space. \n")
+        userInput = str(input("Input not found. Please select a valid space. \n"))
 
     
     return userInput
 
 def getUserMove(gameBoard, inputArray):
-    userInput = getUserInput()
+    userInput = getUserInput(inputArray)
 
     userIndex = findIndex(str(userInput), gameBoard)
     gameBoard[userIndex[0]][userIndex[1]] = "X"
