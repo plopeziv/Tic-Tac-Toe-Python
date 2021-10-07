@@ -11,6 +11,8 @@ class GameState:
          "7", "8", "9"]
 
     def PlayTicTacToe(self):
+        print("Welcome to Tic Tac Toe!")
+        
         takeTurns(self.board, self.possibleInputs)
 
 if __name__ == "__main__":

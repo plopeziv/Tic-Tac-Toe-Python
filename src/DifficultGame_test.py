@@ -2,7 +2,8 @@ import sys
 sys.path
 sys.path.append("/src/")
 
-from DifficultGame import checkForSpotFive, checkForGameEnder, takeFirstAvailableSpot, eliminateWinningCombo, bestComputerSpot
+from DifficultGame import *
+
 # Tests for Occupying Spot Five
 def test_OccupySpotFive():
     gameBoard = [

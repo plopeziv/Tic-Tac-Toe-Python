@@ -2,7 +2,7 @@ import sys
 sys.path
 sys.path.append("/src/")
 
-from ComputerTurn import findPossibleInputs, getComputerInput
+from ComputerTurn import *
 
 def test_findPossibleInputsReturnsArray():
 

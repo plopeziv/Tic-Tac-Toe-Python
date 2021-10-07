@@ -2,38 +2,86 @@ import sys
 sys.path
 sys.path.append("/src/")
 
-from TicTacToeLoop import takeTurns
 from GameClass import GameState
+from TicTacToeLoop import *
 from unittest import mock
-import pytest
 
+# Start of Helper Functions
+def test_catsGameReturnsFalse():
+    return_value = checkForCatsGame(["5"])
+    assert return_value == False
 
-def test_Greeting(capsys):
-    game = GameState()
-    game.board = [["O", "X","X"],
-         ["X", "O", "O"],
-         ["X", "O", "X"]]
-    game.possibleInputs = []
+def test_catsGameReturnsTrue():
+    return_value = checkForCatsGame([])
+    assert return_value == True
 
-    with pytest.raises(SystemExit):
-        takeTurns(game.board, game.possibleInputs)
+def test_printsCorrectBoard(capsys):
+    board = [["1", "2","X"],
+         ["4", "O", "6"],
+         ["X", "8", "9"]]
+
+    printBoard(board)
 
     captured = capsys.readouterr()
 
-    assert "Welcome to Tic Tac Toe!" in captured.out
+    assert " 1 | 2 | X \n---+---+---\n 4 | O | 6 \n---+---+---\n X | 8 | 9 " in captured.out
+# End of Helper Functions
 
+# One Turn
+@mock.patch("UserTurn.getUserInput", return_value = "4")
+def test_oneTurnUpdatesPossibleInputs(computerMock):
+    originalBoard = [["1", "2", "3"],
+         ["4", "5", "6"],
+         ["7", "8", "9"]]
+    
+    inputs = ["1", "2", "3", "4", "5",
+        "6", "7", "8", "9"]
+
+    newBoard, newInputs = oneTurn(originalBoard, inputs)
+
+    assert len(newInputs) == 7
+
+@mock.patch("UserTurn.getUserInput", return_value = "4")
+def test_oneTurnUpdatesGameBoard(useMock):
+    originalBoard = [["1", "2", "3"],
+         ["4", "5", "6"],
+         ["7", "8", "9"]]
+
+    inputs = ["1", "2", "3", "4", "5",
+        "6", "7", "8", "9"]
+
+    newBoard, newInputs = oneTurn(originalBoard, inputs)
+
+    assert newBoard == [["1", "2", "3"],
+         ["X", "O", "6"],
+         ["7", "8", "9"]]
+
+# Take Turns
 def test_CheckForGameOver(capsys):
     game = GameState()
     game.board = [["X", "X", "X"],
         ["X", "O", "O"],
         ["X", "O", "X"]]
 
-    with pytest.raises(SystemExit):
-        takeTurns(game.board, game.possibleInputs)
+    takeTurns(game.board, game.possibleInputs)
 
     captured = capsys.readouterr()
 
     assert "Game Over!" in captured.out
+
+@mock.patch("UserTurn.getUserInput", return_value = "4")
+def test_CheckCatsGameInitiates(userMock, capsys):
+    originalBoard = [["X", "O", "X"],
+         ["4", "X", "O"],
+         ["O", "X", "O"]]
+
+    inputs = ["4"]
+
+    takeTurns(originalBoard, inputs)
+
+    captured = capsys.readouterr()
+
+    assert "Cats Game!" in captured.out
 
 @mock.patch("builtins.input", side_effect = [5])
 def test_CheckGameLoopRunsWhenFalse(turnMock, capsys):
@@ -46,8 +94,7 @@ def test_CheckGameLoopRunsWhenFalse(turnMock, capsys):
          "4", "5", "6",
          "7", "8", "9"]
 
-    with pytest.raises(SystemExit):
-        takeTurns(game.board, game.possibleInputs)
+    takeTurns(game.board, game.possibleInputs)
 
     captured = capsys.readouterr()
 

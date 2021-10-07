@@ -1,17 +1,13 @@
 from GameClass import GameState
-import pytest
 
-def test_RunsTicTacToe(capsys):
+def test_Greeting(capsys):
     game = GameState()
     game.board = [["O", "X","X"],
          ["X", "O", "O"],
          ["X", "O", "X"]]
-
     game.possibleInputs = []
 
-
-    with pytest.raises(SystemExit):
-        game.PlayTicTacToe()
+    game.PlayTicTacToe()
 
     captured = capsys.readouterr()
 
