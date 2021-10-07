@@ -3,7 +3,6 @@ sys.path
 sys.path.append("/src/")
 
 from TicTacToeLoop import takeTurns
-from WinningCombo import checkForWin
 from GameClass import GameState
 from unittest import mock
 import pytest
