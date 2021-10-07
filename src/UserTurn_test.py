@@ -39,6 +39,13 @@ def test_userInput(userMock):
 
     assert userInput == "5"
 
+@mock.patch("builtins.input", side_effect = ["S", "5"])
+def test_userInputExitsWhileLoop(userMock):
+    possibleInputs = ["1", "3", "5"]
+    userInput = getUserInput(possibleInputs)
+
+    assert userInput == "5"
+
 @mock.patch("builtins.input", return_value = 5)
 def test_userInputReturnsString(userMock):
     possibleInputs = ["1", "3", "5"]

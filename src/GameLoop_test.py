@@ -9,14 +9,13 @@ import pytest
 
 
 def test_Greeting(capsys):
-    game = GameState()
-    game.board = [["O", "X","X"],
+    board = [["O", "X","X"],
          ["X", "O", "O"],
          ["X", "O", "X"]]
-    game.possibleInputs = []
+    possibleInputs = []
 
     with pytest.raises(SystemExit):
-        takeTurns(game, True)
+        takeTurns(board, possibleInputs, True)
 
     captured = capsys.readouterr()
 
@@ -26,22 +25,22 @@ def test_CheckForGameOver(capsys):
     game = GameState()
 
     with pytest.raises(SystemExit):
-        takeTurns(game, True)
+        takeTurns(game.board, game.possibleInputs, True)
 
     captured = capsys.readouterr()
 
     assert "Game Over!" in captured.out
 
-@mock.patch("builtins.input", return_value = None)
+@mock.patch("builtins.input", side_effect = [3])
 def test_CheckGameLoopRunsWhenFalse(turnMock, capsys):
-    game = GameState()
+    board = [["O", "X","3"],
+         ["X", "5", "O"],
+         ["X", "O", "X"]]
 
-    game.possibleInputs = ["1", "2","3",
-         "4", "5", "6",
-         "7", "8", "9"]
+    possibleInputs = ["3", "5"]
 
     with pytest.raises(SystemExit):
-        takeTurns(game)
+        takeTurns(board, possibleInputs)
 
     captured = capsys.readouterr()
 

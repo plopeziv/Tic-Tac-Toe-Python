@@ -3,17 +3,17 @@ from TicTacToe import *
 from GameClass import GameState
 from WinningCombo import checkForWin
 
-def takeTurns(gameClass, winCounter=False):
+def takeTurns(board, possibleInputs, winCounter=False):
 
     print("Welcome to Tic Tac Toe!")
 
     while winCounter == False:
-        gameClass.board, gameClass.possibleInputs = oneTurn(gameClass.board, gameClass.possibleInputs)
-        winCounter = checkForWin(gameClass.board)
+        board, possibleInputs = oneTurn(board, possibleInputs)
+        winCounter = checkForWin(board)
 
     if winCounter == True:
         print("Game Over!")
-        print(printBoard(gameClass.board))
+        print(printBoard(board))
 
         sys.exit()
 
