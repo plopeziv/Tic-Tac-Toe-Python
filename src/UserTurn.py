@@ -16,7 +16,6 @@ def getUserInput(possibleInputArray):
     userInput = str(input("Please select a square! \n"))
 
     while inputChecker(userInput, possibleInputArray) == False:
-        print(userInput)
         userInput = str(input("Input not found. Please select a valid space. \n"))
 
 
