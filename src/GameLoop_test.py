@@ -17,15 +17,20 @@ def test_Greeting(capsys):
     with pytest.raises(SystemExit):
         takeTurns(board, possibleInputs, True)
 
+
     captured = capsys.readouterr()
 
     assert "Welcome to Tic Tac Toe!" in captured.out
 
 def test_CheckForGameOver(capsys):
     game = GameState()
+    game.board = [["X", "X","X"],
+         ["X", "O", "O"],
+         ["X", "O", "X"]]
 
     with pytest.raises(SystemExit):
         takeTurns(game.board, game.possibleInputs, True)
+  
 
     captured = capsys.readouterr()
 
