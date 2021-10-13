@@ -2,7 +2,7 @@ import sys
 sys.path
 sys.path.append("/src/")
 
-from TicTacToe import *
+from OneTurn import *
 from GameClass import GameState
 from unittest import mock
 import pytest

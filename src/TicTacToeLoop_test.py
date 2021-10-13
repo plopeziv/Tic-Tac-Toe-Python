@@ -2,21 +2,21 @@ import sys
 sys.path
 sys.path.append("/src/")
 
-from GameLoop import takeTurns
+from TicTacToeLoop import takeTurns
 from GameClass import GameState
 from unittest import mock
 import pytest
 
 
 def test_Greeting(capsys):
-    board = [["O", "X","X"],
+    game = GameState()
+    game.board = [["O", "X","X"],
          ["X", "O", "O"],
          ["X", "O", "X"]]
-    possibleInputs = []
+    game.possibleInputs = []
 
     with pytest.raises(SystemExit):
-        takeTurns(board, possibleInputs, True)
-
+        takeTurns(game.board, game.possibleInputs)
 
     captured = capsys.readouterr()
 
@@ -24,28 +24,30 @@ def test_Greeting(capsys):
 
 def test_CheckForGameOver(capsys):
     game = GameState()
-    game.board = [["X", "X","X"],
-         ["X", "O", "O"],
-         ["X", "O", "X"]]
+    game.board = [["X", "X", "X"],
+        ["X", "O", "O"],
+        ["X", "O", "X"]]
 
     with pytest.raises(SystemExit):
-        takeTurns(game.board, game.possibleInputs, True)
-  
+        takeTurns(game.board, game.possibleInputs)
 
     captured = capsys.readouterr()
 
     assert "Game Over!" in captured.out
 
-@mock.patch("builtins.input", side_effect = [3])
+@mock.patch("builtins.input", side_effect = [5])
 def test_CheckGameLoopRunsWhenFalse(turnMock, capsys):
-    board = [["O", "X","3"],
-         ["X", "5", "O"],
-         ["X", "O", "X"]]
+    game = GameState()
+    game.board = [["O", "O", "3"],
+        ["4", "5", "6"],
+        ["7", "8", "9"]]
 
-    possibleInputs = ["3", "5"]
+    game.possibleInputs = ["3",
+         "4", "5", "6",
+         "7", "8", "9"]
 
     with pytest.raises(SystemExit):
-        takeTurns(board, possibleInputs)
+        takeTurns(game.board, game.possibleInputs)
 
     captured = capsys.readouterr()
 
