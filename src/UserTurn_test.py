@@ -53,7 +53,7 @@ def test_userInputReturnsString(userMock):
 
     assert type(userInput) == str
 
-@mock.patch("UserTurn.getUserInput", return_value = "5")
+@mock.patch("src.UserTurn.getUserInput", return_value = "5")
 def test_getUserMoveChangesBoard(userMock):
     gameBoard = [["1", "2","3"],
          ["4", "5", "6"],
@@ -66,7 +66,7 @@ def test_getUserMoveChangesBoard(userMock):
 
     assert returnBoard[1][1] == "X"
 
-@mock.patch("UserTurn.getUserInput", return_value = "5")
+@mock.patch("src.UserTurn.getUserInput", return_value = "5")
 def test_getUserMoveChangesInputArray(userMock):
     gameBoard = [["1", "2","3"],
          ["4", "5", "6"],

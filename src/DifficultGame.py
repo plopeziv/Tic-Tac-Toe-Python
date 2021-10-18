@@ -2,8 +2,8 @@ from WinningCombo import checkForWin
 from copy import deepcopy
 
 def bestComputerSpot (gameBoard):
-    computerPicks = [checkForGameEnder(deepcopy(gameBoard), "O"),
-                    checkForGameEnder(deepcopy(gameBoard), "X"),
+    computerPicks = [tryToWinGame(deepcopy(gameBoard)),
+                    blockWinningSpot(deepcopy(gameBoard)),
                     checkForSpotFive(deepcopy(gameBoard)),
                     eliminateWinningCombo(deepcopy(gameBoard)),
                     takeFirstAvailableSpot(deepcopy(gameBoard))]
@@ -30,6 +30,14 @@ def checkForGameEnder(gameboard, XorO):
                     return gameboard
                 
                 gameboard[row][column] = item
+
+def tryToWinGame(gameboard):
+    gameboard = checkForGameEnder(gameboard, "O")
+    return gameboard
+
+def blockWinningSpot(gameboard):
+    gameboard = checkForGameEnder(gameboard, "X")
+    return gameboard
 
 def eliminateWinningCombo(gameboard):
     itemArray = [gameboard[1][1], gameboard[2][2], gameboard[0][2]]

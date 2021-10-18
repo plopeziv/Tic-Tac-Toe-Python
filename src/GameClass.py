@@ -1,19 +1,37 @@
 from TicTacToeLoop import takeTurns
+import numpy as np
+import itertools
 
 class GameState:
     def __init__ (self):
-        self.board = [["1", "2","3"],
-         ["4", "5", "6"],
-         ["7", "8", "9"]]
-
-        self.possibleInputs = ["1", "2","3",
-         "4", "5", "6",
-         "7", "8", "9"]
+        pass
 
     def PlayTicTacToe(self):
-        print("Welcome to Tic Tac Toe!")      
-        takeTurns(self.board, self.possibleInputs)
+        print("Welcome to Tic Tac Toe!")  
+        takeTurns(self._createGameboard(3), self._createInputArray(3))
         self.PlayAgain()
+
+    def _createInputArray(self, gameWidth):
+        Indexed = (gameWidth * gameWidth)
+        possibleInputs = list()
+        
+        for position in range(Indexed):
+            possibleInputs.append(str(position + 1))
+        return possibleInputs
+
+    def _createGameboard(self, gameWidth):
+        gameBoard = list()
+        positionSpot = itertools.count(1)
+        
+        for widthPosition in range(gameWidth):
+            gameRow = list()
+            
+            for horizontalPosition in range(gameWidth):
+                gameRow.append(str(next(positionSpot)))
+            
+            gameBoard.append(gameRow)
+
+        return gameBoard
 
     def PlayAgain(self):
         possibleInputs = ["Y", "N"]

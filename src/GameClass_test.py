@@ -1,13 +1,10 @@
 from GameClass import GameState
 from unittest import mock
-# Start of PlayTicTacToe tests
+
+@mock.patch("src.GameClass.GameState._createInputArray", return_value = [])
 @mock.patch("builtins.input", return_value = "n")
-def test_Greeting(usermock, capsys):
+def test_Greeting(arraymock, usermock, capsys):
     game = GameState()
-    game.board = [["O", "X","X"],
-         ["X", "O", "O"],
-         ["X", "O", "X"]]
-    game.possibleInputs = []
 
     game.PlayTicTacToe()
 
@@ -15,8 +12,23 @@ def test_Greeting(usermock, capsys):
 
     assert "Welcome to Tic Tac Toe!" in captured.out
 
+def test_createInputArray():
+    game = GameState()
+
+    assert game._createInputArray(3) == ["1", "2","3",
+                                        "4", "5", "6",
+                                        "7", "8", "9"]
+
+def test_createGameboard():
+    game = GameState()
+
+    assert game._createGameboard(3) == [["1", "2","3"],
+         ["4", "5", "6"],
+         ["7", "8", "9"]]
+
+@mock.patch("src.GameClass.GameState._createInputArray", return_value = [])
 @mock.patch("builtins.input", return_value = "n")
-def test_TicTacToeInitiatesTakeTurns(usermock, capsys):
+def test_TicTacToeInitiatesTakeTurns(arraymock, usermock, capsys):
     game = GameState()
     game.board = [["O", "X","X"],
          ["X", "O", "O"],
@@ -28,9 +40,7 @@ def test_TicTacToeInitiatesTakeTurns(usermock, capsys):
     captured = capsys.readouterr()
 
     assert "Cats Game!" in captured.out
-# End of PlayTicTacToe tests
 
-# Start of Helper Functions
 @mock.patch("builtins.input", return_value = "n")
 def test_gatherInput(inputMock):
      game = GameState()
@@ -75,4 +85,3 @@ def test_checkLoopInitiatesSecondInput(inputMock, capsys):
      captured = capsys.readouterr()
 
      assert loopReturn == "2"
-# End of Helper Functions

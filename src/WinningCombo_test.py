@@ -9,7 +9,6 @@ def test_checkBadBoards():
         [],[],[]
     ]
 
-    # Assert some error
     assert checkWinningRows(gameBoard) == "Please enter a 3 by 3 matrix"
     
 def test_checkWinningRowsReturnsFalse():
@@ -67,8 +66,6 @@ def test_checkSecondWinningDiagonalReturnsWin():
         ["7", "8", "O"]]
 
     assert checkWinningDiagonals(gameBoard) == True
-
-# Intigration Tests
 
 def test_noWinDetected():
     gameBoard = [

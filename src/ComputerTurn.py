@@ -22,7 +22,6 @@ def findPossibleInputs(gameBoard):
 
 def getComputerInput(gameBoard):
 
-    # Difficult Game Choice Module
     newBoard = bestComputerSpot(gameBoard)
 
     possibleInputs = findPossibleInputs(newBoard)

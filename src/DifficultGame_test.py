@@ -4,7 +4,6 @@ sys.path.append("/src/")
 
 from DifficultGame import *
 
-# Tests for Occupying Spot Five
 def test_OccupySpotFive():
     gameBoard = [
         ["1", "2", "3"],
@@ -38,7 +37,6 @@ def test_SpotFiveClosedO():
 
     assert returnValue == None
 
-# Tests for a game winning spot
 def test_ForWinningSpot():
     gameBoard = [
         ["O", "2", "3"],
@@ -46,6 +44,19 @@ def test_ForWinningSpot():
         ["7", "8", "O"]]
 
     returnValue = checkForGameEnder(gameBoard, "O")
+
+    assert returnValue == [
+        ["O", "2", "3"],
+        ["4", "O", "6"],
+        ["7", "8", "O"]]
+
+def test_takeWinningSpot():
+    gameBoard = [
+        ["O", "2", "3"],
+        ["4", "5", "6"],
+        ["7", "8", "O"]]
+
+    returnValue = tryToWinGame(gameBoard)
 
     assert returnValue == [
         ["O", "2", "3"],
@@ -65,7 +76,19 @@ def test_ForLosingSpot():
         ["4", "X", "6"],
         ["X", "8", "O"]]
 
-#Eliminate specific winning combo
+def test_blockWinningSpot():
+    gameBoard = [
+        ["X", "2", "3"],
+        ["4", "5", "6"],
+        ["7", "8", "X"]]
+
+    returnValue = blockWinningSpot(gameBoard)
+
+    assert returnValue == [
+        ["X", "2", "3"],
+        ["4", "O", "6"],
+        ["7", "8", "X"]]
+
 def test_winningComboIgnoredOpen():
     gameBoard = [
         ["1", "2", "X"],
@@ -89,7 +112,6 @@ def test_winningCombo():
         ["4", "O", "6"],
         ["7", "8", "X"]]
 
-# Tests To Occupy First Available Spot
 def test_firstAvailableSpot():
     gameBoard = [
         ["X", "O", "X"],
@@ -116,7 +138,6 @@ def test_firstAvailableSpotEmptyBoard():
         ["4", "5", "6"],
         ["7", "8", "9"]]
 
-# Intigration Tests
 def test_takeSpotFive():
     gameBoard = [
         ["X", "2", "3"],

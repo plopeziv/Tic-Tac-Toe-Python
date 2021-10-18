@@ -6,7 +6,6 @@ from GameClass import GameState
 from TicTacToeLoop import *
 from unittest import mock
 
-# Start of Helper Functions
 def test_catsGameReturnsFalse():
     return_value = checkForCatsGame(["5"])
     assert return_value == False
@@ -25,10 +24,8 @@ def test_printsCorrectBoard(capsys):
     captured = capsys.readouterr()
 
     assert " 1 | 2 | X \n---+---+---\n 4 | O | 6 \n---+---+---\n X | 8 | 9 " in captured.out
-# End of Helper Functions
 
-# One Turn
-@mock.patch("UserTurn.getUserInput", return_value = "4")
+@mock.patch("src.UserTurn.getUserInput", return_value = "4")
 def test_oneTurnUpdatesPossibleInputs(computerMock):
     originalBoard = [["1", "2", "3"],
          ["4", "5", "6"],
@@ -41,7 +38,7 @@ def test_oneTurnUpdatesPossibleInputs(computerMock):
 
     assert len(newInputs) == 7
 
-@mock.patch("UserTurn.getUserInput", return_value = "4")
+@mock.patch("src.UserTurn.getUserInput", return_value = "4")
 def test_oneTurnUpdatesGameBoard(useMock):
     originalBoard = [["1", "2", "3"],
          ["4", "5", "6"],
@@ -56,20 +53,21 @@ def test_oneTurnUpdatesGameBoard(useMock):
          ["X", "O", "6"],
          ["7", "8", "9"]]
 
-# Take Turns
 def test_CheckForGameOver(capsys):
     game = GameState()
-    game.board = [["X", "X", "X"],
+    board = [["X", "X", "X"],
         ["X", "O", "O"],
         ["X", "O", "X"]]
 
-    takeTurns(game.board, game.possibleInputs)
+    possibleInputs = []
+
+    takeTurns(board, possibleInputs)
 
     captured = capsys.readouterr()
 
     assert "Game Over!" in captured.out
 
-@mock.patch("UserTurn.getUserInput", return_value = "4")
+@mock.patch("src.UserTurn.getUserInput", return_value = "4")
 def test_CheckCatsGameInitiates(userMock, capsys):
     originalBoard = [["X", "O", "X"],
          ["4", "X", "O"],
@@ -86,15 +84,15 @@ def test_CheckCatsGameInitiates(userMock, capsys):
 @mock.patch("builtins.input", side_effect = [5])
 def test_CheckGameLoopRunsWhenFalse(turnMock, capsys):
     game = GameState()
-    game.board = [["O", "O", "3"],
+    board = [["O", "O", "3"],
         ["4", "5", "6"],
         ["7", "8", "9"]]
 
-    game.possibleInputs = ["3",
+    possibleInputs = ["3",
          "4", "5", "6",
          "7", "8", "9"]
 
-    takeTurns(game.board, game.possibleInputs)
+    takeTurns(board, possibleInputs)
 
     captured = capsys.readouterr()
 
